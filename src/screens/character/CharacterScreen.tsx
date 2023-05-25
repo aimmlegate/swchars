@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import {
   Button,
@@ -11,10 +11,11 @@ import {
 } from "@nextui-org/react";
 import { useGetCharacterQuery } from "../../people";
 import { Property } from "./Property";
+import { Loader } from "../../components/LoaderCard";
 
 export const CharacterScreen = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { data, isLoading, error } = useGetCharacterQuery(id ?? "0");
 
   const state: "normal" | "loading" | "error" = (() => {
@@ -33,9 +34,8 @@ export const CharacterScreen = () => {
       <Spacer y={2} />
 
       <Container gap={0}>
-        <Link to="/">Return</Link>
         <Spacer y={1} />
-        {state === "loading" && <Loading size="xl" />}
+        {state === "loading" && <Loader />}
         {state === "error" && <p>Error</p>}
         {state === "normal" && (
           <Card>
@@ -65,6 +65,9 @@ export const CharacterScreen = () => {
               id={id!}
             />
             <Property name="Mass:" value={data?.mass} path="mass" id={id!} />
+            <Card.Footer>
+              <Button onPress={() => navigate(-1)}>Return</Button>
+            </Card.Footer>
           </Card>
         )}
       </Container>

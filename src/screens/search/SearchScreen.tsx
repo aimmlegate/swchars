@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useDebouncedValue } from "../../useDebouncedValue";
 import { useGetPageQuery } from "../../people";
+import { useSearchParams } from "react-router-dom";
 import {
-  Navbar,
-  Text,
   Input,
   Spacer,
   Container,
@@ -13,10 +12,16 @@ import {
 import { SWAPI_PAGE_SIZE } from "../../consts";
 import { CharsTable } from "./CharsTable";
 import { Header } from "../../components/Header";
+import { convertToNumber } from "../../utils";
+import { Loader } from "../../components/LoaderCard";
 
 export const SearchScreen = () => {
-  const [current, setCurrent] = useState(1);
-  const [search, setSearch] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = convertToNumber(searchParams.get("page"));
+  const [current, setCurrent] = useState(initialPage);
+  const [search, setSearch] = useState<string>(
+    searchParams.get("search") ?? ""
+  );
   const debouncedSearchTerm = useDebouncedValue({ value: search, delay: 300 });
 
   const { data, error, isFetching } = useGetPageQuery({
@@ -26,7 +31,13 @@ export const SearchScreen = () => {
 
   const setSearchValue = (str: string) => {
     setSearch(str);
+    setSearchParams({ search: str });
     setCurrent(1);
+  };
+
+  const setCurrentPage = (n: number) => {
+    setSearchParams({ page: `${n}` });
+    setCurrent(n);
   };
 
   const state: "normal" | "loading" | "noData" | "error" = (() => {
@@ -60,7 +71,7 @@ export const SearchScreen = () => {
       <Container gap={0}>
         {state === "error" && <p>Error</p>}
         {state === "noData" && <p>No data found</p>}
-        {state === "loading" && <Loading size="xl" />}
+        {state === "loading" && <Loader />}
         {state === "normal" && <CharsTable data={data?.results ?? []} />}
       </Container>
       <Spacer y={2} />
@@ -70,7 +81,7 @@ export const SearchScreen = () => {
             total={Math.ceil((data?.count ?? 0) / SWAPI_PAGE_SIZE)}
             initialPage={current}
             animated={false}
-            onChange={(page: number) => setCurrent(page)}
+            onChange={(page: number) => setCurrentPage(page)}
           />
         )}
       </Container>
