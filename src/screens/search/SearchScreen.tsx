@@ -12,6 +12,7 @@ import {
 } from "@nextui-org/react";
 import { SWAPI_PAGE_SIZE } from "../../consts";
 import { CharsTable } from "./CharsTable";
+import { Header } from "../../components/Header";
 
 export const SearchScreen = () => {
   const [current, setCurrent] = useState(1);
@@ -43,13 +44,8 @@ export const SearchScreen = () => {
 
   return (
     <>
-      <Navbar>
-        <Navbar.Brand>
-          <Text b color="inherit" hideIn="xs">
-            SWCHARS
-          </Text>
-        </Navbar.Brand>
-        <Navbar.Content>
+      <Header
+        content={
           <Input
             clearable
             width="240px"
@@ -58,8 +54,8 @@ export const SearchScreen = () => {
             value={search}
             onChange={(e) => setSearchValue(e.target.value)}
           />
-        </Navbar.Content>
-      </Navbar>
+        }
+      />
       <Spacer y={2} />
       <Container gap={0}>
         {state === "error" && <p>Error</p>}

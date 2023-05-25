@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+
 import "./index.css";
 
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { peopleApi } from "./people.ts";
 import { NextUIProvider } from "@nextui-org/react";
+import { BrowserRouter } from "react-router-dom";
+import { App } from "./App.tsx";
 
 export const store = configureStore({
   reducer: {
@@ -26,7 +28,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <NextUIProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </NextUIProvider>
     </Provider>
   </React.StrictMode>
