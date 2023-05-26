@@ -1,0 +1,53 @@
+import { SearchScreen } from "../SearchScreen";
+import { renderWithProviders } from "../../../testHelpers";
+import { fireEvent, waitFor } from "@testing-library/react";
+
+describe("SearchScreen", () => {
+  it("should render data", async () => {
+    const { getByLabelText } = renderWithProviders(<SearchScreen />);
+    await waitFor(() => {
+      expect(getByLabelText("Characters table")).toBeInTheDocument();
+    });
+    const table = getByLabelText("Characters table");
+    const links = table.querySelectorAll(
+      'a[aria-label="Link to character details"]'
+    );
+    const lastPaginationButton = getByLabelText("9 item");
+    const currentActive = getByLabelText("1 item active");
+    expect(links.length).toBe(10);
+    expect(lastPaginationButton).toBeInTheDocument();
+    expect(currentActive).toBeInTheDocument();
+  });
+
+  it("pagination should work", async () => {
+    const { getByLabelText } = renderWithProviders(<SearchScreen />);
+    await waitFor(() => {
+      expect(getByLabelText("Characters table")).toBeInTheDocument();
+    });
+
+    const lastPaginationButton = getByLabelText("9 item");
+
+    fireEvent.click(lastPaginationButton);
+
+    await waitFor(() => {
+      expect(getByLabelText("9 item active")).toBeInTheDocument();
+    });
+  });
+
+  it("search should work", async () => {
+    const { getByLabelText, getByText } = renderWithProviders(<SearchScreen />);
+    await waitFor(() => {
+      expect(getByLabelText("Characters table")).toBeInTheDocument();
+    });
+
+    const searchInput = getByLabelText("Search");
+
+    fireEvent.change(searchInput, { target: { value: "John" } });
+
+    await waitFor(() => {
+      const substringElement = getByText(/John/);
+
+      expect(substringElement).toBeInTheDocument();
+    });
+  });
+});

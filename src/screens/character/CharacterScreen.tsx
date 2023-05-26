@@ -10,9 +10,12 @@ import { NumberEditField } from "./NumberEditField";
 import { GenderEditField } from "./GenderEditField";
 
 export const CharacterScreen = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const id = "1";
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetCharacterQuery(id ?? "0");
+
+  console.log("useGetCharacterQuery", data);
 
   const state: "normal" | "loading" | "error" = (() => {
     if (error) {

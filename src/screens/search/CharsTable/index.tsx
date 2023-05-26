@@ -28,7 +28,10 @@ export const CharsTable: React.FC<Props> = ({ data }) => {
           <Table.Row key={char.url}>
             <Table.Cell>
               {
-                <Link to={`/people/${getIdFromSWapiUrl(char.url)}`}>
+                <Link
+                  to={`/people/${getIdFromSWapiUrl(char.url)}`}
+                  aria-label="Link to character details"
+                >
                   {char.name}
                 </Link>
               }

@@ -82,6 +82,7 @@ export const SearchScreen = () => {
       <Container gap={0}>
         {state !== "noData" && (
           <Pagination
+            aria-label="Pagination"
             total={Math.ceil((data?.count ?? 0) / SWAPI_PAGE_SIZE)}
             initialPage={current}
             animated={false}
