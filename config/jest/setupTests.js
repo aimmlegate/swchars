@@ -20,13 +20,12 @@ Object.defineProperty(URL, "createObjectURL", {
   value: jest.fn(),
 });
 
-export const store = setupStore({});
-
-beforeAll(() => testServer.listen());
+beforeAll(() => {
+  testServer.listen();
+});
 
 afterEach(() => {
   testServer.resetHandlers();
-  // store.dispatch(peopleApi.util.resetApiState());
 });
 
 afterAll(() => testServer.close());

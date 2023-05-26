@@ -1,8 +1,15 @@
 import { CharacterScreen } from "../CharacterScreen";
-import { renderWithProviders } from "../../../testHelpers";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { renderWithProviders, store } from "../../../testHelpers";
+import { act, fireEvent, waitFor } from "@testing-library/react";
 import { testServer } from "../../../../testServer";
 import { rest } from "msw";
+import { peopleApi } from "../../../services/people";
+
+afterEach(() => {
+  act(() => {
+    store.dispatch(peopleApi.util.resetApiState());
+  });
+});
 
 describe("CharacterScreen", () => {
   it("should render data", async () => {
