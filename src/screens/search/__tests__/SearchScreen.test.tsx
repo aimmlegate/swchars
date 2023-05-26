@@ -1,6 +1,8 @@
 import { SearchScreen } from "../SearchScreen";
 import { renderWithProviders } from "../../../testHelpers";
 import { fireEvent, waitFor } from "@testing-library/react";
+import { testServer } from "../../../../testServer";
+import { rest } from "msw";
 
 describe("SearchScreen", () => {
   it("should render data", async () => {
@@ -48,6 +50,18 @@ describe("SearchScreen", () => {
       const substringElement = getByText(/John/);
 
       expect(substringElement).toBeInTheDocument();
+    });
+  });
+
+  it("error state", async () => {
+    testServer.use(
+      rest.get("*", (_req, res, ctx) =>
+        res.once(ctx.status(500), ctx.json({ message: "fatal error" }))
+      )
+    );
+    const { getByText } = renderWithProviders(<SearchScreen />);
+    await waitFor(() => {
+      expect(getByText("Error")).toBeInTheDocument();
     });
   });
 });
