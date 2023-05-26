@@ -1,5 +1,6 @@
 module.exports = {
   env: { browser: true, es2020: true },
+  plugin: ["simple-import-sort"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -7,9 +8,11 @@ module.exports = {
     "prettier",
   ],
   parser: "@typescript-eslint/parser",
+  ignorePatterns: ["config/jest/*", "src/test-utils/*", ".eslintrc.cjs"],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   plugins: ["react-refresh"],
   rules: {
     "react-refresh/only-export-components": "warn",
+    "simple-import-sort/imports": "error",
   },
 };

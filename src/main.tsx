@@ -8,7 +8,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
 import ErrorBoundary from "./components/ErrorBoundry/index.tsx";
-import { store } from "./store.ts";
+import { store } from "./store/store.ts";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

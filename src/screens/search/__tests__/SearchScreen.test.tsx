@@ -1,7 +1,7 @@
 import { SearchScreen } from "../SearchScreen";
-import { renderWithProviders, store } from "../../../testHelpers";
+import { renderWithProviders, store } from "../../../test-utils/testHelpers";
 import { act, fireEvent, waitFor } from "@testing-library/react";
-import { testServer } from "../../../../testServer";
+import { testServer } from "../../../test-utils/testServer";
 import { rest } from "msw";
 import { peopleApi } from "../../../services/people";
 
