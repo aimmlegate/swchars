@@ -11,7 +11,7 @@ interface Props {
 export const CharsTable: React.FC<Props> = ({ data }) => {
   return (
     <Table
-      aria-label="Example table with static content"
+      aria-label="Characters table"
       css={{
         height: "auto",
         minWidth: "100%",

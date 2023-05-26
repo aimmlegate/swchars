@@ -23,6 +23,7 @@ export const peopleApi = createApi({
     }),
     updateCharacter: builder.mutation<undefined, UserMutationArgs>({
       queryFn: () => {
+        // noop
         return { data: undefined };
       },
       onQueryStarted(args, { dispatch }) {
