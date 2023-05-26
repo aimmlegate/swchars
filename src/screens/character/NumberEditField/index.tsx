@@ -1,13 +1,12 @@
 import { Button, Container, Input } from "@nextui-org/react";
 import React, { useState } from "react";
 import { TickSquare } from "react-iconly";
+import { EditFieldProps } from "../types";
 
-interface Props {
-  initial: string;
-  onSave: (s: string) => void;
-}
-
-export const NumberEditField: React.FC<Props> = ({ initial, onSave }) => {
+export const NumberEditField: React.FC<EditFieldProps> = ({
+  initial,
+  onSave,
+}) => {
   const [value, setValue] = useState(initial);
   return (
     <Container gap={0} display="flex" justify="flex-end">

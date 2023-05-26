@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 import { Button, Container, Spacer, Table } from "@nextui-org/react";
 import { useGetCharacterQuery } from "../../people";
 import { Property } from "./Property";
-import { Loader } from "../../components/LoaderCard";
+import { LoaderCard } from "../../components/LoaderCard";
 import { ChevronLeft } from "react-iconly";
 import { TextEditField } from "./TextEditField";
 import { NumberEditField } from "./NumberEditField";
@@ -34,7 +34,7 @@ export const CharacterScreen = () => {
       <Spacer y={2} />
       <Container gap={0}>
         <Spacer y={1} />
-        {state === "loading" && <Loader />}
+        {state === "loading" && <LoaderCard />}
         {state === "error" && <p>Error</p>}
         {state === "normal" && (
           <Table aria-label="Character detail information">

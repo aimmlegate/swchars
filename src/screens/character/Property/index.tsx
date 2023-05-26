@@ -2,12 +2,13 @@ import { Button, Container, Text } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useUpdateCharacterMutation } from "../../../people";
 import { Edit } from "react-iconly";
+import { EditFieldProps } from "../types";
 
 interface Props {
   value?: string;
   path: string;
   id: string;
-  EditComponent: React.FC<{ initial: string; onSave: (s: string) => void }>;
+  EditComponent: React.FC<EditFieldProps>;
 }
 
 export const Property: React.FC<Props> = ({

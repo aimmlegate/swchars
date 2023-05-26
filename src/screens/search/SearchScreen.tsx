@@ -2,18 +2,12 @@ import { useState } from "react";
 import { useDebouncedValue } from "../../useDebouncedValue";
 import { useGetPageQuery } from "../../people";
 import { useSearchParams } from "react-router-dom";
-import {
-  Input,
-  Spacer,
-  Container,
-  Pagination,
-  Loading,
-} from "@nextui-org/react";
+import { Input, Spacer, Container, Pagination } from "@nextui-org/react";
 import { SWAPI_PAGE_SIZE } from "../../consts";
 import { CharsTable } from "./CharsTable";
 import { Header } from "../../components/Header";
 import { convertToNumber } from "../../utils";
-import { Loader } from "../../components/LoaderCard";
+import { LoaderCard } from "../../components/LoaderCard";
 
 export const SearchScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,10 +62,15 @@ export const SearchScreen = () => {
         }
       />
       <Spacer y={2} />
-      <Container gap={0}>
+      <Container
+        gap={0}
+        css={{
+          minHeight: "550px",
+        }}
+      >
         {state === "error" && <p>Error</p>}
         {state === "noData" && <p>No data found</p>}
-        {state === "loading" && <Loader />}
+        {state === "loading" && <LoaderCard />}
         {state === "normal" && <CharsTable data={data?.results ?? []} />}
       </Container>
       <Spacer y={2} />

@@ -2,15 +2,14 @@ import { Button, Container } from "@nextui-org/react";
 import React, { useState } from "react";
 import { TickSquare } from "react-iconly";
 import { StyledSelect } from "./styled";
+import { EditFieldProps } from "../types";
 
-interface Props {
-  initial: string;
-  onSave: (s: string) => void;
-}
+const variants = ["male", "female", "hermaphrodite", "n/a", "unknown"];
 
-const variants = ["male", "female", "hermaphrodite", "n/a"];
-
-export const GenderEditField: React.FC<Props> = ({ initial, onSave }) => {
+export const GenderEditField: React.FC<EditFieldProps> = ({
+  initial,
+  onSave,
+}) => {
   const [value, setValue] = useState(initial);
   return (
     <Container gap={0} display="flex" justify="flex-end">
