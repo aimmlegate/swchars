@@ -22,7 +22,7 @@ export const peopleApi = createApi({
       query: (id) => id,
     }),
     updateCharacter: builder.mutation<null, UserMutationArgs>({
-      queryFn: (args) => {
+      queryFn: () => {
         return { data: null };
       },
       onQueryStarted(args, { dispatch }) {
