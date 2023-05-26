@@ -9,7 +9,7 @@ export const NoFoundScreen = () => {
       <Spacer y={2} />
       <Container gap={0}>
         <Text h1>Not Found</Text>
-        <Link to="/">Return</Link>
+        <Link to="/swchars">Return</Link>
       </Container>
     </>
   );
