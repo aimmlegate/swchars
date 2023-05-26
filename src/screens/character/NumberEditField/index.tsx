@@ -6,6 +6,7 @@ import { EditFieldProps } from "../types";
 export const NumberEditField: React.FC<EditFieldProps> = ({
   initial,
   onSave,
+  abortEdit,
 }) => {
   const [value, setValue] = useState(initial);
   return (
@@ -16,8 +17,18 @@ export const NumberEditField: React.FC<EditFieldProps> = ({
         shadow={false}
         animated={false}
         type="number"
+        autoFocus
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => {
+          console.log(e);
+          if (e.key === "Enter") {
+            onSave(value ?? "");
+          }
+          if (e.key === "Escape" && abortEdit) {
+            abortEdit();
+          }
+        }}
       />
       <Button
         auto

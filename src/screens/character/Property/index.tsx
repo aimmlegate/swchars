@@ -27,7 +27,13 @@ export const Property: React.FC<Props> = ({
 
   return (
     <>
-      {isEditing && <EditComponent initial={value ?? ""} onSave={handleSave} />}
+      {isEditing && (
+        <EditComponent
+          initial={value ?? ""}
+          onSave={handleSave}
+          abortEdit={() => setIsEditing(false)}
+        />
+      )}
       {!isEditing && (
         <Container gap={0} display="flex" justify="flex-end">
           <Text size="$md">{value}</Text>
