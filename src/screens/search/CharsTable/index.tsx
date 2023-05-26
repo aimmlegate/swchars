@@ -1,7 +1,7 @@
 import { Table } from "@nextui-org/react";
 import React from "react";
-import { Person } from "../../../types";
-import { getIdFromSWapiUrl } from "../../../utils";
+import { Person } from "../../../utils/types";
+import { getIdFromSWapiUrl } from "../../../utils/utils";
 import { Link } from "react-router-dom";
 
 interface Props {

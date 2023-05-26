@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Button, Container, Spacer, Table } from "@nextui-org/react";
-import { useGetCharacterQuery } from "../../people";
+import { useGetCharacterQuery } from "../../services/people";
 import { Property } from "./Property";
 import { LoaderCard } from "../../components/LoaderCard";
 import { ChevronLeft } from "react-iconly";

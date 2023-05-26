@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useDebouncedValue } from "../../useDebouncedValue";
-import { useGetPageQuery } from "../../people";
+import { useDebouncedValue } from "../../hooks/useDebouncedValue";
+import { useGetPageQuery } from "../../services/people";
 import { useSearchParams } from "react-router-dom";
 import { Input, Spacer, Container, Pagination } from "@nextui-org/react";
-import { SWAPI_PAGE_SIZE } from "../../consts";
+import { SWAPI_PAGE_SIZE } from "../../utils/consts";
 import { CharsTable } from "./CharsTable";
 import { Header } from "../../components/Header";
-import { convertToNumber } from "../../utils";
+import { convertToNumber } from "../../utils/utils";
 import { LoaderCard } from "../../components/LoaderCard";
 
 export const SearchScreen = () => {

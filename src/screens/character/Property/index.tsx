@@ -1,6 +1,6 @@
 import { Button, Container, Text } from "@nextui-org/react";
 import React, { useState } from "react";
-import { useUpdateCharacterMutation } from "../../../people";
+import { useUpdateCharacterMutation } from "../../../services/people";
 import { Edit } from "react-iconly";
 import { EditFieldProps } from "../types";
 

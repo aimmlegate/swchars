@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PaginatedList, Person } from "./types";
-import { API_URL } from "./consts";
+import { PaginatedList, Person } from "../utils/types";
+import { API_URL } from "../utils/consts";
 
 type GetPageArgs = {
   page: number;
