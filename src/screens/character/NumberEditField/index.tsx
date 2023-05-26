@@ -21,7 +21,6 @@ export const NumberEditField: React.FC<EditFieldProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
-          console.log(e);
           if (e.key === "Enter") {
             onSave(value ?? "");
           }
@@ -35,6 +34,7 @@ export const NumberEditField: React.FC<EditFieldProps> = ({
         light
         size="sm"
         color="primary"
+        aria-label="save"
         icon={<TickSquare set="broken" />}
         onPress={() => onSave(value ?? "")}
       >

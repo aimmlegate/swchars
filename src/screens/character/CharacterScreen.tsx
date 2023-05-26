@@ -9,13 +9,23 @@ import { TextEditField } from "./TextEditField";
 import { NumberEditField } from "./NumberEditField";
 import { GenderEditField } from "./GenderEditField";
 
-export const CharacterScreen = () => {
-  // const { id } = useParams();
-  const id = "1";
-  const navigate = useNavigate();
-  const { data, isLoading, error } = useGetCharacterQuery(id ?? "0");
+export const CharacterScreenParamsWrapper = () => {
+  const { id } = useParams();
 
-  console.log("useGetCharacterQuery", data);
+  if (!id) {
+    return null;
+  }
+
+  return <CharacterScreen id={id} />;
+};
+
+interface Props {
+  id: string;
+}
+
+export const CharacterScreen: React.FC<Props> = ({ id }) => {
+  const navigate = useNavigate();
+  const { data, isLoading, error } = useGetCharacterQuery(id);
 
   const state: "normal" | "loading" | "error" = (() => {
     if (error) {
@@ -85,7 +95,7 @@ export const CharacterScreen = () => {
                   />
                 </Table.Cell>
               </Table.Row>
-              <Table.Row>
+              <Table.Row aria-label="DDD">
                 <Table.Cell>Eye Color</Table.Cell>
                 <Table.Cell>
                   <Property

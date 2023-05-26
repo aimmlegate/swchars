@@ -37,7 +37,9 @@ describe("SearchScreen", () => {
   });
 
   it("search should work", async () => {
-    const { getByLabelText, getByText } = renderWithProviders(<SearchScreen />);
+    const { getByLabelText, getAllByText } = renderWithProviders(
+      <SearchScreen />
+    );
     await waitFor(() => {
       expect(getByLabelText("Characters table")).toBeInTheDocument();
     });
@@ -47,9 +49,9 @@ describe("SearchScreen", () => {
     fireEvent.change(searchInput, { target: { value: "John" } });
 
     await waitFor(() => {
-      const substringElement = getByText(/John/);
+      const substringElement = getAllByText(/John/i);
 
-      expect(substringElement).toBeInTheDocument();
+      expect(substringElement[0]).toBeInTheDocument();
     });
   });
 

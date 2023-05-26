@@ -21,10 +21,9 @@ export const peopleApi = createApi({
     getCharacter: builder.query<Person, string>({
       query: (id) => id,
     }),
-    updateCharacter: builder.mutation<undefined, UserMutationArgs>({
-      queryFn: () => {
-        // noop
-        return { data: undefined };
+    updateCharacter: builder.mutation<null, UserMutationArgs>({
+      queryFn: (args) => {
+        return { data: null };
       },
       onQueryStarted(args, { dispatch }) {
         dispatch(

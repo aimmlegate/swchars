@@ -44,17 +44,3 @@ export const getLuke = () => {
     url: "https://swapi.dev/api/people/1/",
   };
 };
-
-export const getRandomPerson = (n: number) => {
-  return {
-    name: faker.person.fullName(),
-    height: faker.number.int(),
-    mass: faker.number.int(),
-    hair_color: faker.color.human(),
-    skin_color: faker.color.human(),
-    eye_color: faker.color.human(),
-    birth_year: faker.date.birthdate(),
-    gender: faker.person.gender(),
-    url: `https://swapi.dev/api/people/${n}/`,
-  };
-};

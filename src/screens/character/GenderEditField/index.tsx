@@ -17,6 +17,7 @@ export const GenderEditField: React.FC<EditFieldProps> = ({
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           setValue(e.target.value)
         }
+        aria-label="select gender"
         value={value}
       >
         {variants.map((v) => (
@@ -31,6 +32,7 @@ export const GenderEditField: React.FC<EditFieldProps> = ({
         light
         size="sm"
         color="primary"
+        aria-label="save"
         icon={<TickSquare set="broken" />}
         onPress={() => onSave(value ?? "")}
       >

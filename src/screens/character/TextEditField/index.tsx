@@ -27,7 +27,6 @@ export const TextEditField: React.FC<EditFieldProps> = ({
         autoFocus
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
-          console.log(e);
           if (e.key === "Enter") {
             handleSave(value);
           }
@@ -40,6 +39,7 @@ export const TextEditField: React.FC<EditFieldProps> = ({
         auto
         light
         size="sm"
+        aria-label="save"
         disabled={value.length === 0}
         color="primary"
         icon={<TickSquare set="broken" />}

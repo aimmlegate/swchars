@@ -40,6 +40,7 @@ export const Property: React.FC<Props> = ({
           <Button
             auto
             light
+            aria-label={`Edit ${path}`}
             size="sm"
             icon={<Edit set="broken" />}
             onPress={() => setIsEditing(true)}
