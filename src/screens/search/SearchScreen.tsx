@@ -25,7 +25,12 @@ export const SearchScreen = () => {
 
   const setSearchValue = (str: string) => {
     setSearch(str);
-    setSearchParams({ search: str });
+    if (str.length === 0) {
+      setSearchParams({});
+    } else {
+      setSearchParams({ search: str });
+    }
+
     setCurrent(1);
   };
 
