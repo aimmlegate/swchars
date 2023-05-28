@@ -51,6 +51,9 @@
     "whatwg-fetch": "^3.6.2"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*.{ts,tsx,json}": [
+      "eslint . --fix",
+      "prettier --write ."
+    ]
   }
 }
