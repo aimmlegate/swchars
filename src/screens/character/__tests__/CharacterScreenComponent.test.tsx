@@ -4,7 +4,7 @@ import { rest } from 'msw';
 import { peopleApi } from '../../../services/people';
 import { renderWithProviders, store } from '../../../test-utils/testHelpers';
 import { testServer } from '../../../test-utils/testServer';
-import { CharacterScreenComponent } from '../CharacterScreen';
+import { CharacterScreenComponent } from '../CharacterScreenComponent';
 
 afterEach(() => {
   act(() => {

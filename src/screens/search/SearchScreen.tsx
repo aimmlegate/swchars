@@ -1,94 +1,39 @@
-import { Container, Input, Pagination, Spacer } from '@nextui-org/react';
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigationType, useSearchParams } from 'react-router-dom';
 
-import { Header } from '../../components/Header';
-import { LoaderCard } from '../../components/LoaderCard';
-import { useDebouncedValue } from '../../hooks/useDebouncedValue';
-import { useGetPageQuery } from '../../services/people';
-import { SWAPI_PAGE_SIZE } from '../../utils/consts';
-import { convertToNumber } from '../../utils/utils';
-import { CharsTable } from './CharsTable';
+import { convertToNumber, formatQueryString } from '../../utils/utils';
+import { SearchScreenComponent } from './SearchScreenComponent';
 
 export const SearchScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialPage = convertToNumber(searchParams.get('page'));
-  const [current, setCurrent] = useState(initialPage);
-  const [search, setSearch] = useState<string>(searchParams.get('search') ?? '');
-  const debouncedSearchTerm = useDebouncedValue({ value: search, delay: 300 });
+  const location = useLocation();
+  const navType = useNavigationType();
+  const currentPage = convertToNumber(searchParams.get('page'));
+  const currentSearch = searchParams.get('search') ?? '';
 
-  const { data, error, isFetching } = useGetPageQuery({
-    page: current,
-    search: debouncedSearchTerm,
-  });
-
-  const setSearchValue = (str: string) => {
-    setSearch(str);
-    if (str.length === 0) {
-      setSearchParams({});
-    } else {
-      setSearchParams({ search: str });
-    }
-
-    setCurrent(1);
+  const handleChangePage = (page: number) => {
+    setSearchParams(formatQueryString({ page, search: currentSearch }));
   };
 
-  const setCurrentPage = (n: number) => {
-    setSearchParams({ page: `${n}` });
-    setCurrent(n);
+  const handleChangeSearch = (search: string) => {
+    setSearchParams(formatQueryString({ page: 1, search }));
   };
 
-  const state: 'normal' | 'loading' | 'noData' | 'error' = (() => {
-    if (error) {
-      return 'error';
+  useEffect(() => {
+    if (navType === 'POP' && location.key !== 'default') {
+      const param = searchParams.get('search');
+      if (param) {
+        setSearchParams(formatQueryString({ page: 1 }));
+      }
     }
-    if (isFetching) {
-      return 'loading';
-    }
-    if (data?.count === 0) {
-      return 'noData';
-    }
-    return 'normal';
-  })();
+  }, [location.key, navType, searchParams, setSearchParams]);
 
   return (
-    <>
-      <Header
-        content={
-          <Input
-            clearable
-            width="240px"
-            placeholder="Search..."
-            aria-label="Search"
-            value={search}
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-        }
-      />
-      <Spacer y={2} />
-      <Container
-        gap={0}
-        css={{
-          minHeight: '550px',
-        }}
-      >
-        {state === 'error' && <p>Error</p>}
-        {state === 'noData' && <p>No data found</p>}
-        {state === 'loading' && <LoaderCard />}
-        {state === 'normal' && <CharsTable data={data?.results ?? []} />}
-      </Container>
-      <Spacer y={2} />
-      <Container gap={0}>
-        {state !== 'noData' && (
-          <Pagination
-            aria-label="Pagination"
-            total={Math.ceil((data?.count ?? 0) / SWAPI_PAGE_SIZE)}
-            initialPage={current}
-            animated={false}
-            onChange={(page: number) => setCurrentPage(page)}
-          />
-        )}
-      </Container>
-    </>
+    <SearchScreenComponent
+      page={currentPage}
+      search={currentSearch}
+      handleChangePage={handleChangePage}
+      handleChangeSearch={handleChangeSearch}
+    />
   );
 };
