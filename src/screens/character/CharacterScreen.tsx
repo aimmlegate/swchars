@@ -9,21 +9,21 @@ import { TextEditField } from "./TextEditField";
 import { NumberEditField } from "./NumberEditField";
 import { GenderEditField } from "./GenderEditField";
 
-export const CharacterScreenParamsWrapper = () => {
+export const CharacterScreen = () => {
   const { id } = useParams();
 
   if (!id) {
     return null;
   }
 
-  return <CharacterScreen id={id} />;
+  return <CharacterScreenComponent id={id} />;
 };
 
 interface Props {
   id: string;
 }
 
-export const CharacterScreen: React.FC<Props> = ({ id }) => {
+export const CharacterScreenComponent: React.FC<Props> = ({ id }) => {
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetCharacterQuery(id);
 

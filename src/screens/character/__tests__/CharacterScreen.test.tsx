@@ -1,4 +1,4 @@
-import { CharacterScreen } from "../CharacterScreen";
+import { CharacterScreenComponent } from "../CharacterScreen";
 import { renderWithProviders, store } from "../../../test-utils/testHelpers";
 import { act, fireEvent, waitFor } from "@testing-library/react";
 import { testServer } from "../../../test-utils/testServer";
@@ -13,7 +13,9 @@ afterEach(() => {
 
 describe("CharacterScreen", () => {
   it("should render data", async () => {
-    const { getByText } = renderWithProviders(<CharacterScreen id={"1"} />);
+    const { getByText } = renderWithProviders(
+      <CharacterScreenComponent id={"1"} />
+    );
     await waitFor(() => {
       expect(getByText(/luke skywalker/i)).toBeInTheDocument();
     });
@@ -21,7 +23,7 @@ describe("CharacterScreen", () => {
 
   it("should save edit", async () => {
     const { getByText, getByLabelText } = renderWithProviders(
-      <CharacterScreen id={"1"} />
+      <CharacterScreenComponent id={"1"} />
     );
     await waitFor(() => {
       expect(getByText(/luke skywalker/i)).toBeInTheDocument();
@@ -47,7 +49,9 @@ describe("CharacterScreen", () => {
         res.once(ctx.status(500), ctx.json({ message: "fatal error" }))
       )
     );
-    const { getByText } = renderWithProviders(<CharacterScreen id={"1"} />);
+    const { getByText } = renderWithProviders(
+      <CharacterScreenComponent id={"1"} />
+    );
     await waitFor(() => {
       expect(getByText("Error")).toBeInTheDocument();
     });
