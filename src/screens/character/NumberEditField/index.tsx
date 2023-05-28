@@ -1,13 +1,10 @@
-import { Button, Container, Input } from "@nextui-org/react";
-import React, { useState } from "react";
-import { TickSquare } from "react-iconly";
-import { EditFieldProps } from "../types";
+import { Button, Container, Input } from '@nextui-org/react';
+import React, { useState } from 'react';
+import { TickSquare } from 'react-iconly';
 
-export const NumberEditField: React.FC<EditFieldProps> = ({
-  initial,
-  onSave,
-  abortEdit,
-}) => {
+import { EditFieldProps } from '../types';
+
+export const NumberEditField: React.FC<EditFieldProps> = ({ initial, onSave, abortEdit }) => {
   const [value, setValue] = useState(initial);
   return (
     <Container gap={0} display="flex" justify="flex-end">
@@ -21,10 +18,10 @@ export const NumberEditField: React.FC<EditFieldProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            onSave(value ?? "");
+          if (e.key === 'Enter') {
+            onSave(value ?? '');
           }
-          if (e.key === "Escape" && abortEdit) {
+          if (e.key === 'Escape' && abortEdit) {
             abortEdit();
           }
         }}
@@ -36,9 +33,9 @@ export const NumberEditField: React.FC<EditFieldProps> = ({
         color="primary"
         aria-label="save"
         icon={<TickSquare set="broken" />}
-        onPress={() => onSave(value ?? "")}
+        onPress={() => onSave(value ?? '')}
       >
-        {" "}
+        {' '}
       </Button>
     </Container>
   );

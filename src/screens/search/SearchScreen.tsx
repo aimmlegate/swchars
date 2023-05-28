@@ -1,21 +1,20 @@
-import { useState } from "react";
-import { useDebouncedValue } from "../../hooks/useDebouncedValue";
-import { useGetPageQuery } from "../../services/people";
-import { useSearchParams } from "react-router-dom";
-import { Input, Spacer, Container, Pagination } from "@nextui-org/react";
-import { SWAPI_PAGE_SIZE } from "../../utils/consts";
-import { CharsTable } from "./CharsTable";
-import { Header } from "../../components/Header";
-import { convertToNumber } from "../../utils/utils";
-import { LoaderCard } from "../../components/LoaderCard";
+import { Container, Input, Pagination, Spacer } from '@nextui-org/react';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { Header } from '../../components/Header';
+import { LoaderCard } from '../../components/LoaderCard';
+import { useDebouncedValue } from '../../hooks/useDebouncedValue';
+import { useGetPageQuery } from '../../services/people';
+import { SWAPI_PAGE_SIZE } from '../../utils/consts';
+import { convertToNumber } from '../../utils/utils';
+import { CharsTable } from './CharsTable';
 
 export const SearchScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialPage = convertToNumber(searchParams.get("page"));
+  const initialPage = convertToNumber(searchParams.get('page'));
   const [current, setCurrent] = useState(initialPage);
-  const [search, setSearch] = useState<string>(
-    searchParams.get("search") ?? ""
-  );
+  const [search, setSearch] = useState<string>(searchParams.get('search') ?? '');
   const debouncedSearchTerm = useDebouncedValue({ value: search, delay: 300 });
 
   const { data, error, isFetching } = useGetPageQuery({
@@ -39,17 +38,17 @@ export const SearchScreen = () => {
     setCurrent(n);
   };
 
-  const state: "normal" | "loading" | "noData" | "error" = (() => {
+  const state: 'normal' | 'loading' | 'noData' | 'error' = (() => {
     if (error) {
-      return "error";
+      return 'error';
     }
     if (isFetching) {
-      return "loading";
+      return 'loading';
     }
     if (data?.count === 0) {
-      return "noData";
+      return 'noData';
     }
-    return "normal";
+    return 'normal';
   })();
 
   return (
@@ -70,17 +69,17 @@ export const SearchScreen = () => {
       <Container
         gap={0}
         css={{
-          minHeight: "550px",
+          minHeight: '550px',
         }}
       >
-        {state === "error" && <p>Error</p>}
-        {state === "noData" && <p>No data found</p>}
-        {state === "loading" && <LoaderCard />}
-        {state === "normal" && <CharsTable data={data?.results ?? []} />}
+        {state === 'error' && <p>Error</p>}
+        {state === 'noData' && <p>No data found</p>}
+        {state === 'loading' && <LoaderCard />}
+        {state === 'normal' && <CharsTable data={data?.results ?? []} />}
       </Container>
       <Spacer y={2} />
       <Container gap={0}>
-        {state !== "noData" && (
+        {state !== 'noData' && (
           <Pagination
             aria-label="Pagination"
             total={Math.ceil((data?.count ?? 0) / SWAPI_PAGE_SIZE)}

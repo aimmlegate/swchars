@@ -1,16 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { NextUIProvider } from '@nextui-org/react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import "./index.css";
+import { App } from './App.tsx';
+import ErrorBoundary from './components/ErrorBoundry/index.tsx';
+import './index.css';
+import { store } from './store/store.ts';
 
-import { Provider } from "react-redux";
-import { NextUIProvider } from "@nextui-org/react";
-import { BrowserRouter } from "react-router-dom";
-import { App } from "./App.tsx";
-import ErrorBoundary from "./components/ErrorBoundry/index.tsx";
-import { store } from "./store/store.ts";
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
@@ -21,5 +20,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </NextUIProvider>
       </Provider>
     </ErrorBoundary>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -1,13 +1,14 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { Header } from "../../components/Header";
-import { Button, Container, Spacer, Table } from "@nextui-org/react";
-import { useGetCharacterQuery } from "../../services/people";
-import { Property } from "./Property";
-import { LoaderCard } from "../../components/LoaderCard";
-import { ChevronLeft } from "react-iconly";
-import { TextEditField } from "./TextEditField";
-import { NumberEditField } from "./NumberEditField";
-import { GenderEditField } from "./GenderEditField";
+import { Button, Container, Spacer, Table } from '@nextui-org/react';
+import { ChevronLeft } from 'react-iconly';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { Header } from '../../components/Header';
+import { LoaderCard } from '../../components/LoaderCard';
+import { useGetCharacterQuery } from '../../services/people';
+import { GenderEditField } from './GenderEditField';
+import { NumberEditField } from './NumberEditField';
+import { Property } from './Property';
+import { TextEditField } from './TextEditField';
 
 export const CharacterScreen = () => {
   const { id } = useParams();
@@ -27,14 +28,14 @@ export const CharacterScreenComponent: React.FC<Props> = ({ id }) => {
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetCharacterQuery(id);
 
-  const state: "normal" | "loading" | "error" = (() => {
+  const state: 'normal' | 'loading' | 'error' = (() => {
     if (error) {
-      return "error";
+      return 'error';
     }
     if (isLoading) {
-      return "loading";
+      return 'loading';
     }
-    return "normal";
+    return 'normal';
   })();
 
   if (!id) {
@@ -47,15 +48,15 @@ export const CharacterScreenComponent: React.FC<Props> = ({ id }) => {
       <Spacer y={2} />
       <Container gap={0}>
         <Spacer y={1} />
-        {state === "loading" && <LoaderCard />}
-        {state === "error" && <p>Error</p>}
-        {state === "normal" && (
+        {state === 'loading' && <LoaderCard />}
+        {state === 'error' && <p>Error</p>}
+        {state === 'normal' && (
           <Table aria-label="Character detail information">
             <Table.Header>
               <Table.Column>Key</Table.Column>
               <Table.Column
                 css={{
-                  textAlign: "end",
+                  textAlign: 'end',
                 }}
               >
                 Value
@@ -65,12 +66,7 @@ export const CharacterScreenComponent: React.FC<Props> = ({ id }) => {
               <Table.Row>
                 <Table.Cell>Name</Table.Cell>
                 <Table.Cell>
-                  <Property
-                    value={data?.name}
-                    path="name"
-                    id={id}
-                    EditComponent={TextEditField}
-                  />
+                  <Property value={data?.name} path="name" id={id} EditComponent={TextEditField} />
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
@@ -143,11 +139,7 @@ export const CharacterScreenComponent: React.FC<Props> = ({ id }) => {
           </Table>
         )}
         <Spacer y={1} />
-        <Button
-          size="sm"
-          icon={<ChevronLeft set="broken" />}
-          onPress={() => navigate(-1)}
-        />
+        <Button size="sm" icon={<ChevronLeft set="broken" />} onPress={() => navigate(-1)} />
       </Container>
     </div>
   );

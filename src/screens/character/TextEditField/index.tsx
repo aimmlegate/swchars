@@ -1,13 +1,10 @@
-import { Button, Container, Input } from "@nextui-org/react";
-import React, { useState } from "react";
-import { TickSquare } from "react-iconly";
-import { EditFieldProps } from "../types";
+import { Button, Container, Input } from '@nextui-org/react';
+import React, { useState } from 'react';
+import { TickSquare } from 'react-iconly';
 
-export const TextEditField: React.FC<EditFieldProps> = ({
-  initial,
-  onSave,
-  abortEdit,
-}) => {
+import { EditFieldProps } from '../types';
+
+export const TextEditField: React.FC<EditFieldProps> = ({ initial, onSave, abortEdit }) => {
   const [value, setValue] = useState(initial);
 
   const handleSave = (val: string) => {
@@ -27,10 +24,10 @@ export const TextEditField: React.FC<EditFieldProps> = ({
         autoFocus
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
+          if (e.key === 'Enter') {
             handleSave(value);
           }
-          if (e.key === "Escape" && abortEdit) {
+          if (e.key === 'Escape' && abortEdit) {
             abortEdit();
           }
         }}
@@ -45,7 +42,7 @@ export const TextEditField: React.FC<EditFieldProps> = ({
         icon={<TickSquare set="broken" />}
         onPress={() => handleSave(value)}
       >
-        {" "}
+        {' '}
       </Button>
     </Container>
   );

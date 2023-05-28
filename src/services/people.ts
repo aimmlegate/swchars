@@ -1,6 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PaginatedList, Person } from "../utils/types";
-import { API_URL } from "../utils/consts";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import { API_URL } from '../utils/consts';
+import { PaginatedList, Person } from '../utils/types';
 
 type GetPageArgs = {
   page: number;
@@ -14,9 +15,7 @@ export const peopleApi = createApi({
   endpoints: (builder) => ({
     getPage: builder.query<PaginatedList<Person>, GetPageArgs>({
       query: (args) =>
-        args.search
-          ? `?page=${args.page}&search=${args.search}`
-          : `?page=${args.page}`,
+        args.search ? `?page=${args.page}&search=${args.search}` : `?page=${args.page}`,
     }),
     getCharacter: builder.query<Person, string>({
       query: (id) => id,
@@ -28,18 +27,14 @@ export const peopleApi = createApi({
       },
       onQueryStarted(args, { dispatch }) {
         dispatch(
-          peopleApi.util.updateQueryData("getCharacter", args.id, (draft) => {
+          peopleApi.util.updateQueryData('getCharacter', args.id, (draft) => {
             const news = { ...draft, [args.path]: args.value };
             return news;
-          })
+          }),
         );
       },
     }),
   }),
 });
 
-export const {
-  useGetPageQuery,
-  useGetCharacterQuery,
-  useUpdateCharacterMutation,
-} = peopleApi;
+export const { useGetPageQuery, useGetCharacterQuery, useUpdateCharacterMutation } = peopleApi;

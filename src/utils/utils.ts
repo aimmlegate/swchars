@@ -1,12 +1,9 @@
 export const getIdFromSWapiUrl = (url: string) => {
-  const arr = url.split("/");
+  const arr = url.split('/');
   return arr[arr.length - 2];
 };
 
-export const convertToNumber = (
-  input: string | null,
-  defaultValue = 1
-): number => {
+export const convertToNumber = (input: string | null, defaultValue = 1): number => {
   if (input === null) {
     return defaultValue;
   }

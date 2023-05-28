@@ -1,8 +1,9 @@
-import { Button, Container, Text } from "@nextui-org/react";
-import React, { useState } from "react";
-import { useUpdateCharacterMutation } from "../../../services/people";
-import { Edit } from "react-iconly";
-import { EditFieldProps } from "../types";
+import { Button, Container, Text } from '@nextui-org/react';
+import React, { useState } from 'react';
+import { Edit } from 'react-iconly';
+
+import { useUpdateCharacterMutation } from '../../../services/people';
+import { EditFieldProps } from '../types';
 
 interface Props {
   value?: string;
@@ -11,12 +12,7 @@ interface Props {
   EditComponent: React.FC<EditFieldProps>;
 }
 
-export const Property: React.FC<Props> = ({
-  value,
-  id,
-  path,
-  EditComponent,
-}) => {
+export const Property: React.FC<Props> = ({ value, id, path, EditComponent }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [mutate] = useUpdateCharacterMutation();
 
@@ -29,7 +25,7 @@ export const Property: React.FC<Props> = ({
     <>
       {isEditing && (
         <EditComponent
-          initial={value ?? ""}
+          initial={value ?? ''}
           onSave={handleSave}
           abortEdit={() => setIsEditing(false)}
         />
@@ -45,7 +41,7 @@ export const Property: React.FC<Props> = ({
             icon={<Edit set="broken" />}
             onPress={() => setIsEditing(true)}
           >
-            {" "}
+            {' '}
           </Button>
         </Container>
       )}

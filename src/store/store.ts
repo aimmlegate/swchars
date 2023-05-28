@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { peopleApi } from "../services/people";
+import { configureStore } from '@reduxjs/toolkit';
+
+import { peopleApi } from '../services/people';
 
 export const setupStore = (preloadedState: object) => {
   return configureStore({

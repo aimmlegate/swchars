@@ -1,6 +1,7 @@
-import { Text, Spacer, Container } from "@nextui-org/react";
-import { Header } from "../../components/Header";
-import { Link } from "react-router-dom";
+import { Container, Spacer, Text } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
+
+import { Header } from '../../components/Header';
 
 export const NoFoundScreen = () => {
   return (

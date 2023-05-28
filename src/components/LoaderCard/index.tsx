@@ -1,4 +1,4 @@
-import { Container, Loading, Spacer } from "@nextui-org/react";
+import { Container, Loading, Spacer } from '@nextui-org/react';
 
 export const LoaderCard = () => {
   return (

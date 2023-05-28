@@ -1,22 +1,18 @@
-import { Button, Container } from "@nextui-org/react";
-import React, { useState } from "react";
-import { TickSquare } from "react-iconly";
-import { StyledSelect } from "./styled";
-import { EditFieldProps } from "../types";
+import { Button, Container } from '@nextui-org/react';
+import React, { useState } from 'react';
+import { TickSquare } from 'react-iconly';
 
-const variants = ["male", "female", "hermaphrodite", "n/a", "unknown"];
+import { EditFieldProps } from '../types';
+import { StyledSelect } from './styled';
 
-export const GenderEditField: React.FC<EditFieldProps> = ({
-  initial,
-  onSave,
-}) => {
+const variants = ['male', 'female', 'hermaphrodite', 'n/a', 'unknown'];
+
+export const GenderEditField: React.FC<EditFieldProps> = ({ initial, onSave }) => {
   const [value, setValue] = useState(initial);
   return (
     <Container gap={0} display="flex" justify="flex-end">
       <StyledSelect
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-          setValue(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setValue(e.target.value)}
         aria-label="select gender"
         value={value}
       >
@@ -34,9 +30,9 @@ export const GenderEditField: React.FC<EditFieldProps> = ({
         color="primary"
         aria-label="save"
         icon={<TickSquare set="broken" />}
-        onPress={() => onSave(value ?? "")}
+        onPress={() => onSave(value ?? '')}
       >
-        {" "}
+        {' '}
       </Button>
     </Container>
   );

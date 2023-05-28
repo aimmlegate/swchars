@@ -1,8 +1,9 @@
-import { Table } from "@nextui-org/react";
-import React from "react";
-import { Person } from "../../../utils/types";
-import { getIdFromSWapiUrl } from "../../../utils/utils";
-import { Link } from "react-router-dom";
+import { Table } from '@nextui-org/react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { Person } from '../../../utils/types';
+import { getIdFromSWapiUrl } from '../../../utils/utils';
 
 interface Props {
   data: Person[];
@@ -13,8 +14,8 @@ export const CharsTable: React.FC<Props> = ({ data }) => {
     <Table
       aria-label="Characters table"
       css={{
-        height: "auto",
-        minWidth: "100%",
+        height: 'auto',
+        minWidth: '100%',
       }}
     >
       <Table.Header>
